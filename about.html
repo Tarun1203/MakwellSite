@@ -1,47 +1,1347 @@
-<!doctype html>
-<html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MakWell — About</title>
-<link rel="stylesheet" href="style.css">
-</head><body>
-<header class="header">
-  <div class="container header-inner">
-    <div class="brand">
-      <img src="assets/images/logo.jpg" alt="MakWell Logo">
-      <strong>MakWell</strong>
-    </div>
-    <nav class="nav">
-      <a href="index.html">Home</a>
-      <a href="products.html">Products</a>
-      <a href="new-arrivals.html">New Arrivals</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAKWELL - MAKE IT HAPPEN | About Us</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+          /* Royal Blue & Creamy Color Scheme */
+          --color-royal-blue: rgba(65, 105, 225, 1);
+          --color-royal-blue-dark: rgba(72, 61, 139, 1);
+          --color-royal-blue-light: rgba(100, 149, 237, 1);
+          --color-creamy: rgba(255, 253, 240, 1);
+          --color-creamy-light: rgba(255, 248, 220, 1);
+          --color-white: rgba(255, 255, 255, 1);
+          --color-light-gray-50: rgba(249, 250, 251, 1);
+          --color-light-gray-100: rgba(243, 244, 246, 1);
+          --color-gray-300: rgba(209, 213, 219, 1);
+          --color-gray-600: rgba(75, 85, 99, 1);
+          --color-gray-800: rgba(31, 41, 55, 1);
+          --color-green-500: rgba(34, 197, 94, 1);
+          --color-orange-500: rgba(249, 115, 22, 1);
+          
+          /* Navigation Colors - FIXED */
+          --color-nav-bg: var(--color-creamy) !important;
+          --color-nav-text: var(--color-royal-blue) !important;
+          --color-nav-hover: var(--color-royal-blue-dark) !important;
+
+          /* Semantic Colors */
+          --color-text: var(--color-royal-blue);
+          --color-text-secondary: var(--color-royal-blue-dark);
+          --color-primary: var(--color-royal-blue);
+          --color-primary-hover: var(--color-royal-blue-dark);
+          --color-border: rgba(65, 105, 225, 0.2);
+          --color-card-bg: var(--color-white);
+          --color-background: var(--color-white);
+          --color-surface: var(--color-creamy-light);
+        }
+
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+
+        body {
+          font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          background-color: var(--color-background);
+          color: var(--color-text);
+          line-height: 1.6;
+          overflow-x: hidden;
+        }
+
+        .container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 1rem;
+        }
+
+        /* FIXED NAVIGATION */
+        .navbar {
+          position: fixed !important;
+          top: 0 !important;
+          left: 0 !important;
+          right: 0 !important;
+          background: var(--color-nav-bg) !important;
+          backdrop-filter: blur(20px) !important;
+          border-bottom: 2px solid rgba(65, 105, 225, 0.15) !important;
+          z-index: 1000 !important;
+          box-shadow: 0 4px 20px rgba(65, 105, 225, 0.1) !important;
+        }
+
+        .nav-container {
+          max-width: 1200px !important;
+          margin: 0 auto !important;
+          display: flex !important;
+          justify-content: space-between !important;
+          align-items: center !important;
+          padding: 1rem 1.5rem !important;
+        }
+
+        .nav-logo {
+          display: flex !important;
+          align-items: center !important;
+          gap: 15px !important;
+        }
+
+        .logo-img {
+          height: 50px !important;
+          width: auto !important;
+          border-radius: 8px !important;
+          box-shadow: 0 3px 12px rgba(65, 105, 225, 0.2) !important;
+          border: 2px solid rgba(65, 105, 225, 0.1) !important;
+        }
+
+        .nav-logo h2, .nav-logo-text h2 {
+          color: var(--color-nav-text) !important;
+          font-size: 1.8rem !important;
+          font-weight: 800 !important;
+          margin: 0 !important;
+        }
+
+        .tagline {
+          font-size: 0.85rem !important;
+          color: var(--color-royal-blue-dark) !important;
+          font-weight: 600 !important;
+          letter-spacing: 0.5px !important;
+          text-transform: uppercase !important;
+        }
+
+        .nav-menu {
+          display: flex !important;
+          list-style: none !important;
+          gap: 2rem !important;
+          margin: 0 !important;
+        }
+
+        .nav-link {
+          color: var(--color-nav-text) !important;
+          text-decoration: none !important;
+          font-weight: 600 !important;
+          padding: 0.5rem 1rem !important;
+          border-radius: 0.5rem !important;
+          transition: all 0.15s ease !important;
+        }
+
+        .nav-link:hover {
+          color: var(--color-nav-hover) !important;
+          background: rgba(65, 105, 225, 0.1) !important;
+          transform: translateY(-1px) !important;
+        }
+
+        .hamburger {
+          display: none;
+          flex-direction: column;
+          cursor: pointer;
+          gap: 4px;
+          padding: 0.5rem;
+        }
+
+        .hamburger span {
+          width: 25px;
+          height: 3px;
+          background-color: var(--color-nav-text) !important;
+          transition: 0.15s ease;
+          border-radius: 2px;
+        }
+
+        /* AUTO-FIT IMAGE SYSTEM */
+        img {
+          max-width: 100% !important;
+          height: auto !important;
+          object-fit: cover !important;
+          object-position: center !important;
+        }
+
+        .product-image,
+        .category-card-image,
+        .banner-image,
+        .showcase-image,
+        .product-image-large {
+          position: relative !important;
+          overflow: hidden !important;
+          background: var(--color-light-gray-50) !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          border-radius: 8px !important;
+        }
+
+        .product-image {
+          height: 200px !important;
+        }
+
+        .category-card-image {
+          height: 120px !important;
+        }
+
+        .banner-image {
+          height: 250px !important;
+        }
+
+        .showcase-image {
+          height: 180px !important;
+        }
+
+        .product-image-large {
+          height: 300px !important;
+        }
+
+        .product-image img,
+        .category-card-image img,
+        .banner-image img,
+        .showcase-image img,
+        .product-image-large img {
+          width: 100% !important;
+          height: 100% !important;
+          object-fit: cover !important;
+          object-position: center !important;
+          transition: transform 0.3s ease !important;
+        }
+
+        .product-image:hover img,
+        .category-card-image:hover img,
+        .banner-image:hover img,
+        .showcase-image:hover img,
+        .product-image-large:hover img {
+          transform: scale(1.05) !important;
+        }
+
+        .product-image i,
+        .category-card-image i,
+        .banner-image i,
+        .showcase-image i,
+        .product-image-large i {
+          font-size: 3rem !important;
+          color: var(--color-primary) !important;
+          opacity: 0.6 !important;
+          display: none !important;
+        }
+
+        .product-image.fallback i,
+        .category-card-image.fallback i,
+        .banner-image.fallback i,
+        .showcase-image.fallback i,
+        .product-image-large.fallback i {
+          display: block !important;
+        }
+
+        .product-image.fallback img,
+        .category-card-image.fallback img,
+        .banner-image.fallback img,
+        .showcase-image.fallback img,
+        .product-image-large.fallback img {
+          display: none !important;
+        }
+
+        .image-loading {
+          background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%) !important;
+          background-size: 200% 100% !important;
+          animation: loading 2s infinite !important;
+        }
+
+        @keyframes loading {
+          0% { background-position: 200% 0; }
+          100% { background-position: -200% 0; }
+        }
+
+        /* Button Styles */
+        .btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          padding: 1rem 2rem;
+          border: none;
+          border-radius: 0.75rem;
+          font-weight: 600;
+          text-decoration: none;
+          cursor: pointer;
+          transition: all 0.15s ease;
+          font-size: 0.95rem;
+        }
+
+        .btn--primary {
+          background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));
+          color: var(--color-white);
+          box-shadow: 0 4px 6px rgba(65, 105, 225, 0.1);
+        }
+
+        .btn--primary:hover {
+          background: linear-gradient(135deg, var(--color-primary-hover), var(--color-royal-blue-dark));
+          transform: translateY(-2px);
+          box-shadow: 0 10px 15px rgba(65, 105, 225, 0.15);
+        }
+
+        .btn--outline {
+          background: transparent;
+          color: var(--color-primary);
+          border: 2px solid var(--color-primary);
+        }
+
+        .btn--outline:hover {
+          background: var(--color-primary);
+          color: var(--color-white);
+          transform: translateY(-2px);
+        }
+
+        /* Section Headers */
+        .section-header {
+          text-align: center;
+          margin-bottom: 3rem;
+        }
+
+        .section-title {
+          font-size: 2.5rem;
+          font-weight: 700;
+          margin-bottom: 1rem;
+          color: var(--color-text);
+        }
+
+        .section-subtitle {
+          font-size: 1.1rem;
+          color: var(--color-text-secondary);
+          max-width: 600px;
+          margin: 0 auto;
+        }
+
+        /* About Section */
+        .about-section {
+          padding: 120px 0 4rem;
+          background: var(--color-background);
+        }
+
+        .about-content {
+          display: grid;
+          gap: 4rem;
+        }
+
+        .about-text {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 2rem;
+        }
+
+        .about-card {
+          background: var(--color-card-bg);
+          border: 2px solid var(--color-border);
+          border-radius: 1rem;
+          padding: 2rem;
+          text-align: center;
+          transition: all 0.3s ease;
+          box-shadow: 0 1px 2px rgba(65, 105, 225, 0.05);
+        }
+
+        .about-card:hover {
+          transform: translateY(-5px);
+          border-color: var(--color-primary);
+          box-shadow: 0 10px 15px rgba(65, 105, 225, 0.1);
+        }
+
+        .about-icon {
+          font-size: 2.5rem;
+          color: var(--color-primary);
+          margin-bottom: 1rem;
+        }
+
+        .about-card h3 {
+          font-size: 1.3rem;
+          font-weight: 600;
+          margin-bottom: 1rem;
+          color: var(--color-text);
+        }
+
+        .about-card p {
+          color: var(--color-text-secondary);
+          line-height: 1.6;
+        }
+
+        /* Stats Section */
+        .stats-section {
+          text-align: center;
+        }
+
+        .stats-title {
+          font-size: 1.5rem;
+          font-weight: 600;
+          margin-bottom: 2rem;
+          color: var(--color-text);
+        }
+
+        .stats-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+          gap: 2rem;
+        }
+
+        .stat-item {
+          text-align: center;
+        }
+
+        .stat-number {
+          font-size: 3rem;
+          font-weight: 700;
+          color: var(--color-primary);
+          margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+          color: var(--color-text-secondary);
+          font-weight: 500;
+        }
+
+        /* Categories Overview */
+        .categories-overview {
+          background: var(--color-surface);
+          border-radius: 1rem;
+          padding: 3rem;
+          border: 1px solid var(--color-border);
+          box-shadow: 0 1px 2px rgba(65, 105, 225, 0.05);
+        }
+
+        .categories-title {
+          font-size: 1.5rem;
+          font-weight: 600;
+          margin-bottom: 2rem;
+          text-align: center;
+          color: var(--color-text);
+        }
+
+        .categories-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 2rem;
+        }
+
+        .category-overview-card {
+          background: var(--color-card-bg);
+          border: 1px solid var(--color-border);
+          border-radius: 0.75rem;
+          padding: 2rem;
+          text-align: center;
+          box-shadow: 0 1px 2px rgba(65, 105, 225, 0.05);
+        }
+
+        .category-overview-icon {
+          font-size: 2.5rem;
+          color: var(--color-primary);
+          margin-bottom: 1rem;
+        }
+
+        .category-overview-card h4 {
+          font-size: 1.3rem;
+          font-weight: 600;
+          margin-bottom: 1rem;
+          color: var(--color-text);
+        }
+
+        .category-overview-card p {
+          color: var(--color-text-secondary);
+          margin-bottom: 1rem;
+          line-height: 1.6;
+        }
+
+        .category-features {
+          list-style: none;
+          text-align: left;
+        }
+
+        .category-features li {
+          color: var(--color-text-secondary);
+          padding: 0.25rem 0;
+          position: relative;
+          padding-left: 1rem;
+        }
+
+        .category-features li::before {
+          content: '✓';
+          color: var(--color-primary);
+          position: absolute;
+          left: 0;
+          font-weight: bold;
+        }
+
+        /* Company Info */
+        .company-info {
+          background: var(--color-surface);
+          border-radius: 1rem;
+          padding: 3rem;
+          border: 1px solid var(--color-border);
+          box-shadow: 0 1px 2px rgba(65, 105, 225, 0.05);
+        }
+
+        .company-info-title {
+          font-size: 1.5rem;
+          font-weight: 600;
+          margin-bottom: 2rem;
+          text-align: center;
+          color: var(--color-text);
+        }
+
+        .company-details {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 2rem;
+        }
+
+        .detail-card {
+          text-align: center;
+        }
+
+        .detail-icon {
+          font-size: 2rem;
+          color: var(--color-primary);
+          margin-bottom: 1rem;
+        }
+
+        .detail-card h4 {
+          font-size: 1.1rem;
+          font-weight: 600;
+          margin-bottom: 0.5rem;
+          color: var(--color-text);
+        }
+
+        .detail-card p {
+          color: var(--color-text-secondary);
+          line-height: 1.6;
+        }
+
+        /* Mission & Vision */
+        .mission-vision {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+          gap: 2rem;
+        }
+
+        .mission-card,
+        .vision-card {
+          background: var(--color-card-bg);
+          border: 1px solid var(--color-border);
+          border-radius: 1rem;
+          padding: 2rem;
+          box-shadow: 0 1px 2px rgba(65, 105, 225, 0.05);
+        }
+
+        .mission-card h3,
+        .vision-card h3 {
+          font-size: 1.3rem;
+          font-weight: 600;
+          margin-bottom: 1rem;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          color: var(--color-text);
+        }
+
+        .mission-card h3 i,
+        .vision-card h3 i {
+          color: var(--color-primary);
+        }
+
+        .mission-card p,
+        .vision-card p {
+          color: var(--color-text-secondary);
+          line-height: 1.6;
+        }
+
+        /* Why Choose */
+        .why-choose {
+          background: var(--color-surface);
+          border-radius: 1rem;
+          padding: 3rem;
+          border: 1px solid var(--color-border);
+          box-shadow: 0 1px 2px rgba(65, 105, 225, 0.05);
+        }
+
+        .why-choose-title {
+          font-size: 1.5rem;
+          font-weight: 600;
+          margin-bottom: 2rem;
+          text-align: center;
+          color: var(--color-text);
+        }
+
+        .benefits-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 2rem;
+        }
+
+        .benefit-item {
+          text-align: center;
+        }
+
+        .benefit-icon {
+          font-size: 2rem;
+          color: var(--color-primary);
+          margin-bottom: 1rem;
+        }
+
+        .benefit-item h4 {
+          font-size: 1.1rem;
+          font-weight: 600;
+          margin-bottom: 0.5rem;
+          color: var(--color-text);
+        }
+
+        .benefit-item p {
+          color: var(--color-text-secondary);
+          font-size: 0.9rem;
+        }
+
+        /* Business Info */
+        .business-info {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 2rem;
+          margin-bottom: 4rem;
+        }
+
+        .business-card {
+          background: var(--color-card-bg);
+          border: 2px solid var(--color-border);
+          border-radius: 1rem;
+          padding: 2rem;
+          box-shadow: 0 1px 2px rgba(65, 105, 225, 0.05);
+        }
+
+        .business-icon {
+          font-size: 2rem;
+          color: var(--color-primary);
+          margin-bottom: 1rem;
+        }
+
+        .business-card h3 {
+          font-size: 1.3rem;
+          font-weight: 600;
+          margin-bottom: 1rem;
+          color: var(--color-text);
+        }
+
+        .hours-list,
+        .support-list,
+        .service-list {
+          list-style: none;
+        }
+
+        .hours-item {
+          display: flex;
+          justify-content: space-between;
+          padding: 0.5rem 0;
+          border-bottom: 1px solid var(--color-border);
+        }
+
+        .hours-item:last-child {
+          border-bottom: none;
+        }
+
+        .day {
+          font-weight: 500;
+          color: var(--color-text);
+        }
+
+        .time {
+          color: var(--color-text-secondary);
+        }
+
+        .support-list li,
+        .service-list li {
+          color: var(--color-text-secondary);
+          padding: 0.25rem 0;
+          position: relative;
+          padding-left: 1rem;
+        }
+
+        .support-list li::before,
+        .service-list li::before {
+          content: '•';
+          color: var(--color-primary);
+          position: absolute;
+          left: 0;
+          font-weight: bold;
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+          text-align: center;
+        }
+
+        .quick-actions-title {
+          font-size: 1.5rem;
+          font-weight: 600;
+          margin-bottom: 2rem;
+          color: var(--color-text);
+        }
+
+        .actions-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          gap: 1.5rem;
+        }
+
+        .action-card {
+          background: var(--color-card-bg);
+          border: 1px solid var(--color-border);
+          border-radius: 0.75rem;
+          padding: 2rem;
+          text-align: center;
+          text-decoration: none;
+          color: inherit;
+          transition: all 0.3s ease;
+          box-shadow: 0 1px 2px rgba(65, 105, 225, 0.05);
+        }
+
+        .action-card:hover {
+          transform: translateY(-5px);
+          border-color: var(--color-primary);
+          box-shadow: 0 10px 15px rgba(65, 105, 225, 0.1);
+        }
+
+        .action-icon {
+          font-size: 2rem;
+          color: var(--color-primary);
+          margin-bottom: 1rem;
+        }
+
+        .action-card h4 {
+          font-size: 1.1rem;
+          font-weight: 600;
+          margin-bottom: 0.5rem;
+          color: var(--color-text);
+        }
+
+        .action-card p {
+          color: var(--color-text-secondary);
+          font-size: 0.9rem;
+        }
+
+        /* Footer */
+        .footer {
+          background: var(--color-gray-800);
+          border-top: 1px solid var(--color-border);
+          padding: 4rem 0 1.5rem;
+          margin-top: 4rem;
+          color: var(--color-white);
+        }
+
+        .footer-content {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 3rem;
+          margin-bottom: 2rem;
+        }
+
+        .footer-section h3,
+        .footer-section h4 {
+          color: var(--color-white);
+          margin-bottom: 1rem;
+        }
+
+        .footer-tagline {
+          color: var(--color-gray-300);
+          font-weight: 600;
+          margin-bottom: 1rem;
+        }
+
+        .footer-section p {
+          color: var(--color-gray-300);
+        }
+
+        .footer-links {
+          list-style: none;
+        }
+
+        .footer-links li {
+          margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+          color: var(--color-gray-300);
+          text-decoration: none;
+          transition: all 0.15s ease;
+        }
+
+        .footer-links a:hover {
+          color: var(--color-white);
+        }
+
+        .contact-item {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          margin-bottom: 0.5rem;
+          color: var(--color-gray-300);
+        }
+
+        .contact-item i {
+          color: var(--color-primary);
+          width: 16px;
+        }
+
+        .footer-bottom {
+          text-align: center;
+          padding-top: 1.5rem;
+          border-top: 1px solid rgba(255, 255, 255, 0.1);
+          color: var(--color-gray-300);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+          .nav-menu {
+            position: fixed;
+            top: 80px;
+            left: -100%;
+            width: 100%;
+            height: calc(100vh - 80px);
+            background: var(--color-nav-bg) !important;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            padding-top: 3rem;
+            transition: all 0.3s ease;
+            border-top: 2px solid rgba(65, 105, 225, 0.15);
+          }
+
+          .nav-menu.active {
+            left: 0;
+          }
+
+          .hamburger {
+            display: flex;
+          }
+
+          .nav-container {
+            padding: 1rem;
+          }
+
+          .logo-img {
+            height: 45px;
+          }
+
+          .nav-logo h2 {
+            font-size: 1.6rem;
+          }
+
+          .section-title {
+            font-size: 2rem;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .container {
+            padding: 0 0.5rem;
+          }
+
+          .nav-container {
+            padding: 1rem 0.5rem;
+          }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="assets/images/logo.jpg" alt="MAKWELL Logo" class="logo-img" 
+                     onerror="this.style.display='none'; document.querySelector('.nav-logo-text').classList.add('visible');">
+                <div class="nav-logo-text">
+                    <h2>MAKWELL</h2>
+                    <span class="tagline">MAKE IT HAPPEN</span>
+                </div>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="products.html" class="nav-link">Products</a></li>
+                <li><a href="about.html" class="nav-link">About Us</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+                <li><a href="new-arrivals.html" class="nav-link">New Arrivals</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
     </nav>
-  </div>
-</header>
-<main class="section">
-  <div class="container">
-    <h1 style="margin:0 0 .6rem;color:var(--brand)">About MakWell</h1>
-    <p>We deliver dependable display & appliance technology optimized for energy efficiency and modern design.
-       Our products are crafted for retail, corporate, hospitality, and education environments.</p>
-    <ul class="small">
-      <li>Expert support & flexible deployment</li>
-      <li>Reliable warranty and service</li>
-      <li>Low power consumption with high visual impact</li>
-    </ul>
-    <p style="margin-top:10px">
-      <a class="btn primary" href="assets/specs/Makwell-Brochure.pdf" target="_blank">Open Company Brochure (PDF)</a>
-    </p>
-  </div>
-</main>
 
-<footer class="footer">
-  <div class="container inner">
-    <div class="brand"><img src="assets/images/logo.jpg" alt="MakWell"></div>
-    <div>© <span id="year"></span> MakWell — Make It Happen</div>
-  </div>
-</footer>
-<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-<script src="app.js"></script>
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">About MAKWELL</h2>
+                <p class="section-subtitle">Your trusted partner in premium electronics for modern living</p>
+            </div>
 
-</body></html>
+            <div class="about-content">
+                <!-- About Cards -->
+                <div class="about-text">
+                    <div class="about-card">
+                        <div class="about-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3>Our Story</h3>
+                        <p>MAKWELL - PUSHPAK ENTERPRISES was founded with a vision to make premium electronics accessible to every household. We believe in the power of technology to transform lives and enhance everyday experiences through quality products and reliable service.</p>
+                    </div>
+
+                    <div class="about-card">
+                        <div class="about-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h3>Quality First</h3>
+                        <p>Every product in our collection is carefully selected for its superior quality, advanced features, and durability. We partner with renowned manufacturers to bring you the latest technology at competitive prices.</p>
+                    </div>
+
+                    <div class="about-card">
+                        <div class="about-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Customer Focus</h3>
+                        <p>Our customers are at the heart of everything we do. From product selection to after-sales support, we prioritize customer satisfaction and build lasting relationships based on trust and reliability.</p>
+                    </div>
+
+                    <div class="about-card">
+                        <div class="about-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h3>Innovation</h3>
+                        <p>We stay ahead of technology trends to bring you the most innovative and efficient electronic solutions. Our product range evolves with the changing needs of modern households.</p>
+                    </div>
+                </div>
+
+                <!-- Stats Section -->
+                <div class="stats-section">
+                    <h3 class="stats-title">MAKWELL by Numbers</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-number">5+</div>
+                            <div class="stat-label">Years of Experience</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">1000+</div>
+                            <div class="stat-label">Happy Customers</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">20+</div>
+                            <div class="stat-label">Products Available</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">24/7</div>
+                            <div class="stat-label">Customer Support</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Categories Overview -->
+                <div class="categories-overview">
+                    <h3 class="categories-title">Our Product Categories</h3>
+                    <div class="categories-grid">
+                        <div class="category-overview-card">
+                            <div class="category-overview-icon">
+                                <i class="fas fa-tv"></i>
+                            </div>
+                            <h4>Smart TVs & LED TVs</h4>
+                            <p>From 24" to 65" screens with HD, Full HD, and 4K UHD resolutions. Android TV features with streaming apps.</p>
+                            <ul class="category-features">
+                                <li>Multiple sizes: 24", 32", 40", 43", 50", 55", 65"</li>
+                                <li>HD Ready, Full HD, and 4K UHD options</li>
+                                <li>Smart Android TV and Non-Smart variants</li>
+                                <li>Premium entertainment experience</li>
+                            </ul>
+                        </div>
+
+                        <div class="category-overview-card">
+                            <div class="category-overview-icon">
+                                <i class="fas fa-tshirt"></i>
+                            </div>
+                            <h4>Washing Machines</h4>
+                            <p>Semi-automatic washing machines designed for efficiency and durability in various capacities.</p>
+                            <ul class="category-features">
+                                <li>7.0 KG, 9.0 KG, and 11.0 KG capacities</li>
+                                <li>Powerful motors: 135W to 200W</li>
+                                <li>Toughened glass top construction</li>
+                                <li>Advanced filtration systems</li>
+                            </ul>
+                        </div>
+
+                        <div class="category-overview-card">
+                            <div class="category-overview-icon">
+                                <i class="fas fa-plug"></i>
+                            </div>
+                            <h4>Electronics & Accessories</h4>
+                            <p>Essential electronic accessories including voltage stabilizers and electric irons for complete home solutions.</p>
+                            <ul class="category-features">
+                                <li>Voltage Stabilizers: 500VA and 750W options</li>
+                                <li>Electric Dry Irons: 750W and 1000W</li>
+                                <li>5-year warranty on stabilizers</li>
+                                <li>Digital technology and safety features</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Company Information -->
+                <div class="company-info">
+                    <h3 class="company-info-title">Company Information</h3>
+                    <div class="company-details">
+                        <div class="detail-card">
+                            <div class="detail-icon">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <h4>Business Name</h4>
+                            <p>MAKWELL - PUSHPAK ENTERPRISES</p>
+                        </div>
+
+                        <div class="detail-card">
+                            <div class="detail-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <h4>Location</h4>
+                            <p>Hubli, Karnataka, India</p>
+                        </div>
+
+                        <div class="detail-card">
+                            <div class="detail-icon">
+                                <i class="fas fa-industry"></i>
+                            </div>
+                            <h4>Industry</h4>
+                            <p>Electronics & Home Appliances</p>
+                        </div>
+
+                        <div class="detail-card">
+                            <div class="detail-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <h4>Established</h4>
+                            <p>Serving customers since 2020</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mission & Vision -->
+                <div class="mission-vision">
+                    <div class="mission-card">
+                        <h3>
+                            <i class="fas fa-bullseye"></i>
+                            Our Mission
+                        </h3>
+                        <p>To provide high-quality electronics and home appliances that enhance the lifestyle of our customers while ensuring exceptional service, competitive pricing, and reliable after-sales support. We strive to make modern technology accessible to every household.</p>
+                    </div>
+
+                    <div class="vision-card">
+                        <h3>
+                            <i class="fas fa-eye"></i>
+                            Our Vision
+                        </h3>
+                        <p>To become the most trusted electronics retailer in Karnataka, known for our commitment to quality, customer satisfaction, and innovation. We envision a future where every home is equipped with the best electronic solutions for modern living.</p>
+                    </div>
+                </div>
+
+                <!-- Why Choose MAKWELL -->
+                <div class="why-choose">
+                    <h3 class="why-choose-title">Why Choose MAKWELL?</h3>
+                    <div class="benefits-grid">
+                        <div class="benefit-item">
+                            <div class="benefit-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h4>Extended Warranty</h4>
+                            <p>Up to 5 years warranty on products with comprehensive service support</p>
+                        </div>
+
+                        <div class="benefit-item">
+                            <div class="benefit-icon">
+                                <i class="fas fa-truck"></i>
+                            </div>
+                            <h4>Fast Delivery</h4>
+                            <p>Quick and secure delivery across Karnataka with professional installation</p>
+                        </div>
+
+                        <div class="benefit-item">
+                            <div class="benefit-icon">
+                                <i class="fas fa-rupee-sign"></i>
+                            </div>
+                            <h4>Best Prices</h4>
+                            <p>Competitive pricing with transparent quotations and no hidden costs</p>
+                        </div>
+
+                        <div class="benefit-item">
+                            <div class="benefit-icon">
+                                <i class="fas fa-tools"></i>
+                            </div>
+                            <h4>Expert Service</h4>
+                            <p>Professional installation and dedicated after-sales service team</p>
+                        </div>
+
+                        <div class="benefit-item">
+                            <div class="benefit-icon">
+                                <i class="fas fa-award"></i>
+                            </div>
+                            <h4>Quality Assured</h4>
+                            <p>Only genuine products from authorized dealers and manufacturers</p>
+                        </div>
+
+                        <div class="benefit-item">
+                            <div class="benefit-icon">
+                                <i class="fas fa-headset"></i>
+                            </div>
+                            <h4>24/7 Support</h4>
+                            <p>Round-the-clock customer support via phone, WhatsApp, and email</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Business Hours & Services -->
+                <div class="business-info">
+                    <div class="business-card">
+                        <div class="business-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>Business Hours</h3>
+                        <ul class="hours-list">
+                            <li class="hours-item">
+                                <span class="day">Monday - Saturday</span>
+                                <span class="time">9:00 AM - 8:00 PM</span>
+                            </li>
+                            <li class="hours-item">
+                                <span class="day">Sunday</span>
+                                <span class="time">10:00 AM - 6:00 PM</span>
+                            </li>
+                            <li class="hours-item">
+                                <span class="day">Consultation</span>
+                                <span class="time">Available 24/7</span>
+                            </li>
+                            <li class="hours-item">
+                                <span class="day">WhatsApp Support</span>
+                                <span class="time">24/7</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="business-card">
+                        <div class="business-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3>Our Services</h3>
+                        <ul class="service-list">
+                            <li>Product Consultation and Recommendations</li>
+                            <li>Free Home Delivery within Hubli</li>
+                            <li>Professional Installation Service</li>
+                            <li>Extended Warranty Programs</li>
+                            <li>After-Sales Service and Support</li>
+                            <li>Product Maintenance and Repairs</li>
+                            <li>Customer Training and Support</li>
+                            <li>Flexible Payment Options</li>
+                        </ul>
+                    </div>
+
+                    <div class="business-card">
+                        <div class="business-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3>Customer Support</h3>
+                        <ul class="support-list">
+                            <li>24/7 WhatsApp Support: +91 99800 00515</li>
+                            <li>Email Support: makwellindia456@gmail.com</li>
+                            <li>Technical Assistance and Troubleshooting</li>
+                            <li>Warranty Claims Processing</li>
+                            <li>Product Registration Support</li>
+                            <li>Feedback and Complaints Resolution</li>
+                            <li>Product Exchange and Returns</li>
+                            <li>Installation Scheduling</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <h3 class="quick-actions-title">Get Started with MAKWELL</h3>
+                    <div class="actions-grid">
+                        <a href="products.html" class="action-card">
+                            <div class="action-icon">
+                                <i class="fas fa-shopping-bag"></i>
+                            </div>
+                            <h4>Browse Products</h4>
+                            <p>Explore our complete range of electronics and appliances</p>
+                        </a>
+
+                        <a href="contact.html" class="action-card">
+                            <div class="action-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <h4>Get Quote</h4>
+                            <p>Request a personalized quote for your electronic needs</p>
+                        </a>
+
+                        <a href="new-arrivals.html" class="action-card">
+                            <div class="action-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h4>New Arrivals</h4>
+                            <p>Check out our latest products and special offers</p>
+                        </a>
+
+                        <a href="https://wa.me/919980000515" target="_blank" class="action-card">
+                            <div class="action-icon">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <h4>WhatsApp</h4>
+                            <p>Chat with us instantly for quick assistance and support</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                        <img src="assets/images/logo.jpg" alt="MAKWELL Logo" class="logo-img" onerror="this.style.display='none'">
+                        <div>
+                            <h3>MAKWELL</h3>
+                            <p class="footer-tagline">MAKE IT HAPPEN</p>
+                        </div>
+                    </div>
+                    <p>Premium electronics for modern living. Quality products with reliable performance.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="new-arrivals.html">New Arrivals</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>makwellindia456@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>+91 99800 00515</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Hubli, Karnataka, India</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 MAKWELL - PUSHPAK ENTERPRISES. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('MAKWELL: About page with auto-fit images loading...');
+            
+            // Mobile Menu Toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (hamburger && navMenu) {
+                hamburger.addEventListener('click', function() {
+                    hamburger.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                });
+
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.addEventListener('click', function() {
+                        hamburger.classList.remove('active');
+                        navMenu.classList.remove('active');
+                    });
+                });
+
+                document.addEventListener('click', function(e) {
+                    if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                        hamburger.classList.remove('active');
+                        navMenu.classList.remove('active');
+                    }
+                });
+            }
+
+            // Auto-fit images system
+            function initAutoFitImages() {
+                const imageContainers = document.querySelectorAll(
+                    '.product-image, .category-card-image, .banner-image, .showcase-image, .product-image-large'
+                );
+                
+                imageContainers.forEach(container => {
+                    const img = container.querySelector('img');
+                    const icon = container.querySelector('i');
+                    
+                    if (img) {
+                        container.classList.add('image-loading');
+                        
+                        img.onload = function() {
+                            container.classList.remove('image-loading');
+                            container.classList.remove('fallback');
+                            if (icon) icon.style.display = 'none';
+                        };
+                        
+                        img.onerror = function() {
+                            container.classList.remove('image-loading');
+                            container.classList.add('fallback');
+                            img.style.display = 'none';
+                            if (icon) icon.style.display = 'block';
+                        };
+                        
+                        if (img.complete && img.naturalHeight !== 0) {
+                            container.classList.remove('image-loading');
+                            if (icon) icon.style.display = 'none';
+                        }
+                    }
+                });
+            }
+
+            // Navigation color locking
+            function lockNavigationColors() {
+                const navbar = document.querySelector('.navbar');
+                if (navbar) {
+                    navbar.style.setProperty('background', 'var(--color-nav-bg)', 'important');
+                    
+                    const navLinks = document.querySelectorAll('.nav-link');
+                    navLinks.forEach(link => {
+                        link.style.setProperty('color', 'var(--color-nav-text)', 'important');
+                    });
+                    
+                    const logoText = document.querySelectorAll('.nav-logo h2, .nav-logo-text h2');
+                    logoText.forEach(text => {
+                        text.style.setProperty('color', 'var(--color-nav-text)', 'important');
+                    });
+                }
+            }
+
+            // Initialize systems
+            initAutoFitImages();
+            lockNavigationColors();
+
+            // Scroll handler (only shadow changes, no color changes)
+            window.addEventListener('scroll', function() {
+                const navbar = document.querySelector('.navbar');
+                const currentScrollY = window.scrollY;
+                
+                if (navbar) {
+                    if (currentScrollY > 50) {
+                        navbar.style.setProperty('box-shadow', '0 4px 20px rgba(65, 105, 225, 0.2)', 'important');
+                    } else {
+                        navbar.style.setProperty('box-shadow', '0 4px 20px rgba(65, 105, 225, 0.1)', 'important');
+                    }
+                    lockNavigationColors();
+                }
+            });
+
+            console.log('MAKWELL: About page loaded successfully with auto-fit images!');
+        });
+    </script>
+</body>
+</html>
