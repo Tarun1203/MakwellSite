@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>MakWell Smart TV</title>
+  <meta name="description" content="Browse MakWell smart TVs by size, resolution, and features.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="header">
+  <div class="header-inner">
+    <div class="brand">
+      <img src="assets/images/logo.jpg" alt="MakWell logo"><strong>MakWell</strong>
+    </div>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="smart-tv.html">Smart TV</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <h1>Smart TV — Shop the Range</h1>
+      <p>Filter by size, resolution, OS, and refresh rate. Compare up to 4 models and view key specs instantly.</p>
+      <div class="badges">
+        <span class="badge">Android TV</span>
+        <span class="badge">Google TV</span>
+        <span class="badge">4K UHD</span>
+        <span class="badge">QLED</span>
+      </div>
+    </div>
+    <div class="card"><img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=1600&auto=format&fit=crop" alt="Living room TV"></div>
+  </div>
+</section>
+
+<main class="page">
+  <div class="layout">
+    <aside class="card filters" id="filters">
+      <h3 class="section-title">Filter</h3>
+      <div class="group">
+        <div>Screen Size</div>
+        <div class="chips" data-key="size">
+          <button class="chip" data-value="43">43"</button>
+          <button class="chip" data-value="50">50"</button>
+          <button class="chip" data-value="55">55"</button>
+          <button class="chip" data-value="65">65"</button>
+          <button class="chip" data-value="75">75"</button>
+          <button class="chip" data-value="85">85"</button>
+        </div>
+      </div>
+      <div class="group">
+        <div>Resolution</div>
+        <div class="chips" data-key="resolution">
+          <button class="chip" data-value="FHD">FHD</button>
+          <button class="chip" data-value="4K">4K</button>
+        </div>
+      </div>
+      <div class="group">
+        <div>OS</div>
+        <div class="chips" data-key="os">
+          <button class="chip" data-value="Android TV">Android TV</button>
+          <button class="chip" data-value="Google TV">Google TV</button>
+        </div>
+      </div>
+      <div class="group">
+        <div>Refresh Rate</div>
+        <div class="chips" data-key="refresh">
+          <button class="chip" data-value="60">60 Hz</button>
+          <button class="chip" data-value="120">120 Hz</button>
+        </div>
+      </div>
+      <div class="group">
+        <a class="btn ghost" id="clear-filters">Clear all</a>
+      </div>
+    </aside>
+
+    <section class="card">
+      <div class="sortbar">
+        <div id="result-count">0 results</div>
+        <div>
+          <label for="sort">Sort: </label>
+          <select id="sort">
+            <option value="popular">Most Popular</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+            <option value="size-desc">Size: Large to Small</option>
+          </select>
+        </div>
+      </div>
+      <div class="grid" id="grid"></div>
+      <div class="compare-drawer" id="compare-drawer">
+        <div id="compare-list"></div>
+        <div style="display:flex;gap:8px">
+          <button class="btn ghost" id="clear-compare">Clear</button>
+          <button class="btn" id="open-compare">Compare</button>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<div class="modal" id="quick-modal" role="dialog" aria-modal="true">
+  <div class="modal-card">
+    <div class="modal-head"><strong id="quick-title"></strong><button class="btn ghost" id="close-quick">Close</button></div>
+    <div class="modal-body" id="quick-body"></div>
+  </div>
+</div>
+
+<div class="modal" id="compare-modal" role="dialog" aria-modal="true">
+  <div class="modal-card">
+    <div class="modal-head"><strong>Compare Models</strong><button class="btn ghost" id="close-compare">Close</button></div>
+    <div class="modal-body"><div id="compare-table"></div></div>
+  </div>
+</div>
+
+<script>
+let DATA = [];
+let filters = new URLSearchParams(location.search);
+const q = s => document.querySelector(s);
+const grid = q('#grid'), resultCount = q('#result-count');
+const drawer = q('#compare-drawer'), compareList = q('#compare-list');
+const quickModal = q('#quick-modal'), compareModal = q('#compare-modal');
+const selected = new Set();
+
+function chipActive(key, value, isActive){
+  document.querySelectorAll(`.chips[data-key="${key}"] .chip`).forEach(ch=>{
+    if(ch.dataset.value===value) ch.classList.toggle('active', isActive);
+  });
+}
+function toggleFilter(key, value){
+  const existing = filters.getAll(key);
+  if(existing.includes(value)){
+    const next = existing.filter(v=>v!==value);
+    filters.delete(key); next.forEach(v=>filters.append(key,v));
+    chipActive(key, value, false);
+  } else {
+    filters.append(key, value); chipActive(key, value, true);
+  }
+  history.replaceState(null, '', '?' + filters.toString());
+  render();
+}
+function clearAllFilters(){
+  filters = new URLSearchParams();
+  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+  history.replaceState(null, '', location.pathname);
+  render();
+}
+function applyFilters(items){
+  return items.filter(p=>{
+    for(const key of ['size','resolution','os','refresh']){
+      const vals = filters.getAll(key);
+      if(vals.length){
+        if(key==='size' || key==='refresh'){ if(!vals.includes(String(p[key]))) return false; }
+        else { if(!vals.includes(p[key])) return false; }
+      }
+    } return true;
+  });
+}
+function sortItems(items, how){
+  const x = [...items];
+  if(how==='price-asc') x.sort((a,b)=>a.price-b.price);
+  else if(how==='price-desc') x.sort((a,b)=>b.price-a.price);
+  else if(how==='size-desc') x.sort((a,b)=>b.size-a.size);
+  return x;
+}
+function specLine(p){ return `${p.size}" • ${p.resolution} • ${p.os} • ${p.refresh}Hz`; }
+function card(p){
+  const active = selected.has(p.id) ? 'style="outline:2px solid var(--brand)"' : '';
+  return `<article class="card product" ${active}>
+    <div class="img"><img src="${p.image}" alt="${p.name}"></div>
+    <div class="meta">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px">
+        <div>
+          <div style="font-weight:800">${p.name}</div>
+          <div class="specline">${specLine(p)}</div>
+          <div class="price">₹${p.price.toLocaleString('en-IN')}</div>
+        </div>
+        <div class="badge">${p.resolution}</div>
+      </div>
+      <div class="actions">
+        <button class="btn" data-quick="${p.id}">Quick View</button>
+        <button class="btn ghost" data-compare="${p.id}">${selected.has(p.id)?'Remove':'Compare'}</button>
+      </div>
+    </div>
+  </article>`;
+}
+function render(){
+  const filtered = applyFilters(DATA);
+  resultCount.textContent = filtered.length + ' results';
+  const items = sortItems(filtered, q('#sort').value);
+  grid.innerHTML = items.map(card).join('');
+  updateDrawer();
+}
+function updateDrawer(){
+  if(selected.size===0){ drawer.classList.remove('active'); compareList.innerHTML=''; return; }
+  drawer.classList.add('active');
+  compareList.innerHTML = [...selected].map(id=>{
+    const p = DATA.find(x=>x.id===id); return `<span class="badge">${p.name}</span>`;
+  }).join('');
+}
+function openQuick(p){
+  q('#quick-title').textContent = p.name;
+  q('#quick-body').innerHTML = `
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <img src="${p.image}" alt="${p.name}" style="border-radius:12px;border:1px solid var(--line)">
+      <div>
+        <div class="price" style="margin-bottom:8px">₹${p.price.toLocaleString('en-IN')}</div>
+        <table><tbody>
+          <tr><th>Size</th><td>${p.size}"</td></tr>
+          <tr><th>Resolution</th><td>${p.resolution}</td></tr>
+          <tr><th>OS</th><td>${p.os}</td></tr>
+          <tr><th>Refresh</th><td>${p.refresh} Hz</td></tr>
+          ${Object.entries(p.specs).map(([k,v])=>`<tr><th>${k}</th><td>${v}</td></tr>`).join('')}
+        </tbody></table>
+      </div>
+    </div>`;
+  quickModal.classList.add('open');
+}
+function buildCompareTable(ids){
+  const rows = [
+    ['Model', ...ids.map(id=>DATA.find(x=>x.id===id).name)],
+    ['Price', ...ids.map(id=>'₹'+DATA.find(x=>x.id===id).price.toLocaleString('en-IN'))],
+    ['Size', ...ids.map(id=>DATA.find(x=>x.id===id).size + '"')],
+    ['Resolution', ...ids.map(id=>DATA.find(x=>x.id===id).resolution)],
+    ['OS', ...ids.map(id=>DATA.find(x=>x.id===id).os)],
+    ['Refresh', ...ids.map(id=>DATA.find(x=>x.id===id).refresh + ' Hz')],
+    ...['Panel','Brightness','Bezel','HDMI','USB','Wi‑Fi'].map(k=>[k, ...ids.map(id=>DATA.find(x=>x.id===id).specs[k]||'-')])
+  ];
+  const header = '<tr>'+['','A','B','C','D'].slice(0, ids.length+1).map(h=>`<th>${h}</th>`).join('')+'</tr>';
+  const body = rows.map(r=>'<tr>'+r.map((c,i)=>i===0?`<th>${c}</th>`:`<td>${c}</td>`).join('')+'</tr>').join('');
+  q('#compare-table').innerHTML = `<table>${header}${body}</table>`;
+}
+document.addEventListener('click', (e)=>{
+  if(e.target.dataset.quick){ const p = DATA.find(x=>x.id===e.target.dataset.quick); openQuick(p); }
+  if(e.target.dataset.compare){ const id = e.target.dataset.compare; if(selected.has(id)) selected.delete(id); else if(selected.size<4) selected.add(id); render(); }
+  if(e.target.id==='close-quick'){ quickModal.classList.remove('open'); }
+  if(e.target.id==='open-compare'){ buildCompareTable([...selected]); compareModal.classList.add('open'); }
+  if(e.target.id==='close-compare'){ compareModal.classList.remove('open'); }
+  if(e.target.id==='clear-compare'){ selected.clear(); render(); }
+  if(e.target.closest('.chip')){ const chip=e.target.closest('.chip'); toggleFilter(chip.parentElement.dataset.key, chip.dataset.value); }
+  if(e.target.id==='clear-filters'){ clearAllFilters(); }
+});
+document.addEventListener('change', (e)=>{ if(e.target.id==='sort') render(); });
+fetch('products-tv.json').then(r=>r.json()).then(items=>{ DATA = items; render(); });
+</script>
+</body></html>
