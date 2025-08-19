@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MakWell — Products</title>
+<link rel="stylesheet" href="style.css">
+</head><body>
+<header class="header">
+  <div class="container header-inner">
+    <div class="brand">
+      <img src="assets/images/logo.jpg" alt="MakWell Logo">
+      <strong>MakWell</strong>
+    </div>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="new-arrivals.html">New Arrivals</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+<main class="section">
+  <div class="container">
+    <h1 style="margin:0 0 .6rem;color:var(--brand)">Products</h1>
+    <p class="small">Browse our best‑sellers. Download spec sheets for full details.</p>
+    <div class="grid grid-3" style="margin-top:12px">
+      <article class="product-card">
+        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1400&auto=format&fit=crop" alt="MakWell 43 FHD">
+        <div class="meta">
+          <h3>MakWell 43″ Smart TV</h3>
+          <div class="kvs">FHD • Android TV • 60Hz</div>
+          <div style="margin-top:8px;display:flex;gap:.5rem;flex-wrap:wrap">
+            <a class="btn primary" href="contact.html">Enquire</a>
+            <a class="btn ghost" href="assets/specs/Makwell-Brochure.pdf" target="_blank">View Specs (PDF)</a>
+          </div>
+        </div>
+      </article>
+      <article class="product-card">
+        <img src="https://images.unsplash.com/photo-1589561253898-768105ca91a8?q=80&w=1400&auto=format&fit=crop" alt="MakWell 50 4K">
+        <div class="meta">
+          <h3>MakWell 50″ 4K UHD</h3>
+          <div class="kvs">4K • Google TV • Slim Bezel</div>
+          <div style="margin-top:8px;display:flex;gap:.5rem;flex-wrap:wrap">
+            <a class="btn primary" href="contact.html">Enquire</a>
+            <a class="btn ghost" href="assets/specs/Makwell-Brochure.pdf" target="_blank">View Specs (PDF)</a>
+          </div>
+        </div>
+      </article>
+      <article class="product-card">
+        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1400&auto=format&fit=crop" alt="MakWell 65 QLED">
+        <div class="meta">
+          <h3>MakWell 65″ QLED 120Hz</h3>
+          <div class="kvs">QLED • 120Hz • HDMI 2.1</div>
+          <div style="margin-top:8px;display:flex;gap:.5rem;flex-wrap:wrap">
+            <a class="btn primary" href="contact.html">Enquire</a>
+            <a class="btn ghost" href="assets/specs/Makwell-Brochure.pdf" target="_blank">View Specs (PDF)</a>
+          </div>
+        </div>
+      </article>
+    </div>
+    <div class="banner" style="margin-top:14px">
+      <strong>Looking for washing machines?</strong>
+      <a class="btn ghost" href="assets/specs/Makwell-Washing-Machine.pdf" target="_blank" style="margin-left:.6rem">Download WM Catalogue</a>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container inner">
+    <div class="brand"><img src="assets/images/logo.jpg" alt="MakWell"></div>
+    <div>© <span id="year"></span> MakWell — Make It Happen</div>
+  </div>
+</footer>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<script src="app.js"></script>
+
+</body></html>

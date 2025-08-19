@@ -1,10 +1,44 @@
-<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'>
-<title>Contact</title><link rel='stylesheet' href='styles.css'></head>
-<body><header class='header'><div class='header-inner'><div class='brand'><img src='assets/images/logo.jpg'><strong>MakWell</strong></div>
-<nav class='nav'><a href='index.html'>Home</a><a href='smart-tv.html'>Smart TV</a><a href='about.html'>About</a><a href='contact.html'>Contact</a></nav></div></header>
-<main class='page'><h1>Contact Us</h1><p>Email: sales@makwell.example</p>
-<form onsubmit="event.preventDefault(); alert('Thanks! We will get back to you.');" style="display:grid;gap:8px;max-width:480px">
-<input required placeholder="Your name" style="padding:.6rem;border:1px solid var(--line);border-radius:8px;font:inherit">
-<input type="email" required placeholder="Email address" style="padding:.6rem;border:1px solid var(--line);border-radius:8px;font:inherit">
-<textarea rows="5" placeholder="Message" style="padding:.6rem;border:1px solid var(--line);border-radius:8px;font:inherit"></textarea>
-<button class="btn" type="submit">Send</button></form></main></body></html>
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MakWell — Contact</title>
+<link rel="stylesheet" href="style.css">
+</head><body>
+<header class="header">
+  <div class="container header-inner">
+    <div class="brand">
+      <img src="assets/images/logo.jpg" alt="MakWell Logo">
+      <strong>MakWell</strong>
+    </div>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="new-arrivals.html">New Arrivals</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+<main class="section">
+  <div class="container">
+    <h1 style="margin:0 0 .6rem;color:var(--brand)">Contact Us</h1>
+    <form onsubmit="event.preventDefault(); alert('Thanks! We will get back to you.');" style="display:grid;gap:10px;max-width:520px">
+      <input required placeholder="Your name" style="padding:.7rem;border:1px solid var(--line);border-radius:10px;font:inherit">
+      <input type="email" required placeholder="Email address" style="padding:.7rem;border:1px solid var(--line);border-radius:10px;font:inherit">
+      <textarea rows="5" placeholder="Message" style="padding:.7rem;border:1px solid var(--line);border-radius:10px;font:inherit"></textarea>
+      <button class="btn primary" type="submit">Send</button>
+    </form>
+    <p class="small" style="margin-top:10px">Prefer email? Write to <a href="mailto:sales@makwell.example">sales@makwell.example</a></p>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container inner">
+    <div class="brand"><img src="assets/images/logo.jpg" alt="MakWell"></div>
+    <div>© <span id="year"></span> MakWell — Make It Happen</div>
+  </div>
+</footer>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<script src="app.js"></script>
+
+</body></html>
