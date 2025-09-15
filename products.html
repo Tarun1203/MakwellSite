@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Products | Makwell Electronics</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <style>
         .products-hero {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -16,25 +16,20 @@
             padding: 150px 0 100px;
             margin-top: 80px;
         }
-
         .products-hero h1 {
             font-size: 3rem;
             margin-bottom: 1rem;
         }
-
         .products-hero p {
             font-size: 1.25rem;
             opacity: 0.9;
         }
-
         .product-details {
             padding: 80px 0;
         }
-
         .product-category {
             margin-bottom: 60px;
         }
-
         .category-title {
             font-size: 2rem;
             margin-bottom: 30px;
@@ -43,13 +38,11 @@
             display: inline-block;
             padding-bottom: 10px;
         }
-
         .product-specs {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
         }
-
         .spec-card {
             background: white;
             border: 1px solid #e5e5e5;
@@ -58,33 +51,36 @@
             text-align: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-
         .spec-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
         }
-
         .spec-card h3 {
             font-size: 1.5rem;
             margin-bottom: 15px;
             color: #333;
         }
-
         .spec-list {
             list-style: none;
             margin-bottom: 20px;
+            padding-left: 0;
         }
-
         .spec-list li {
             padding: 5px 0;
             color: #666;
         }
-
         .price-tag {
             font-size: 1.5rem;
             font-weight: 700;
             color: #007bff;
             margin-bottom: 20px;
+        }
+        .product-image {
+            width: 100%;
+            height: auto;
+            max-height: 180px;
+            object-fit: contain;
+            margin-bottom: 15px;
         }
     </style>
 </head>
@@ -94,11 +90,11 @@
         <nav class="navbar">
             <div class="nav-container">
                 <div class="nav-brand">
-                    <img src="assets/images/logo.jpg" alt="Makwell" class="logo">
+                    <img src="assets/images/logo.jpg" alt="Makwell" class="logo" />
                 </div>
                 <ul class="nav-menu">
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="products.html">Products</a></li>
+                    <li><a href="products.html" class="active">Products</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="support.html">Support</a></li>
                     <li><a href="blogs.html">Blogs</a></li>
@@ -111,7 +107,6 @@
             </div>
         </nav>
     </header>
-
     <main>
         <!-- Products Hero -->
         <section class="products-hero">
@@ -120,7 +115,6 @@
                 <p>Discover our complete range of premium electronics</p>
             </div>
         </section>
-
         <!-- Product Details -->
         <section class="product-details">
             <div class="container">
@@ -129,6 +123,7 @@
                     <h2 class="category-title">Smart TVs & LED TVs</h2>
                     <div class="product-specs">
                         <div class="spec-card">
+                            <img src="assets/images/tv-24hd.jpg" alt="24 inch HD Smart TV" class="product-image" />
                             <h3>24" HD Smart TV</h3>
                             <ul class="spec-list">
                                 <li>HD Ready 1366×768</li>
@@ -140,8 +135,8 @@
                             <div class="price-tag">₹ 11,999</div>
                             <button class="product-btn">Know more</button>
                         </div>
-
                         <div class="spec-card">
+                            <img src="assets/images/tv-32hd.jpg" alt="32 inch HD Smart TV" class="product-image" />
                             <h3>32" HD Smart TV</h3>
                             <ul class="spec-list">
                                 <li>HD Ready 1366×768</li>
@@ -153,8 +148,10 @@
                             <div class="price-tag">₹ 13,999</div>
                             <button class="product-btn">Know more</button>
                         </div>
-
-                        <div class="spec-card">
+                       
+                            <div class="price-tag">₹ 34,999</div>
+                            <button class="product-btn">Know more</button>
+                        </div>.jpg" alt="43 inch UHD 4K Smart TV" class="product-image" />
                             <h3>43" UHD 4K Smart TV</h3>
                             <ul class="spec-list">
                                 <li>4K Ultra HD 3840×2160</li>
@@ -166,9 +163,35 @@
                             <div class="price-tag">₹ 24,999</div>
                             <button class="product-btn">Know more</button>
                         </div>
-
                         <div class="spec-card">
-                            <h3>55" UHD 4K Smart TV</h3>
+                            <img src="assets/images/tv-43-webos.jpg" alt="55 inch UHD 4K webos TV" class="product-image" />
+                            <h3>55" UHD 4K webos TV</h3>
+                            <ul class="spec-list">
+                                <li>4K Ultra HD 3840×2160</li>
+                                <li>Android 11</li>
+                                <li>40W HiFi Speakers</li>
+                                <li>HDR10+ with Dolby Vision</li>
+                                <li>Voice Control</li>
+                            </ul>
+                            <div class="price-tag">₹ 27,999</div>
+                            <button class="product-btn">Know more</button>
+                        </div>
+                        <div class="spec-card">
+                            <img src="assets/images/tv-50-google.jpg" alt="50 inch UHD 4K Google TV" class="product-image" />
+                            <h3>55" UHD 4K webos TV</h3>
+                            <ul class="spec-list">
+                                <li>4K Ultra HD 3840×2160</li>
+                                <li>Android 11</li>
+                                <li>40W HiFi Speakers</li>
+                                <li>HDR10+ with Dolby Vision</li>
+                                <li>Voice Control</li>
+                            </ul>
+                            <div class="price-tag">₹ 30,999</div>
+                            <button class="product-btn">Know more</button>
+                        </div>
+                        <div class="spec-card">
+                            <img src="assets/images/tv-55-webos.jpg" alt="55 inch UHD 4K webos TV" class="product-image" />
+                            <h3>55" UHD 4K webos TV</h3>
                             <ul class="spec-list">
                                 <li>4K Ultra HD 3840×2160</li>
                                 <li>Android 11</li>
@@ -179,9 +202,9 @@
                             <div class="price-tag">₹ 34,999</div>
                             <button class="product-btn">Know more</button>
                         </div>
-
                         <div class="spec-card">
-                            <h3>65" UHD 4K Smart TV</h3>
+                            <img src="assets/images/tv-65-webos.jpg" alt="65 inch UHD 4K Webos TV" class="product-image" />
+                            <h3>65" UHD 4K Webos TV</h3>
                             <ul class="spec-list">
                                 <li>4K Ultra HD 3840×2160</li>
                                 <li>Android 11</li>
@@ -190,16 +213,15 @@
                                 <li>Voice Control</li>
                             </ul>
                             <div class="price-tag">₹ 44,999</div>
-                            <button class="product-btn">Know more</button>
                         </div>
                     </div>
                 </div>
-
                 <!-- Washing Machines -->
                 <div class="product-category">
                     <h2 class="category-title">Washing Machines</h2>
                     <div class="product-specs">
                         <div class="spec-card">
+                            <img src="assets/images/MKSSAWM7.jpg" alt="7.0 KG Semi-Automatic Washing Machine" class="product-image" />
                             <h3>7.0 KG Semi-Automatic</h3>
                             <ul class="spec-list">
                                 <li>7.0 KG Capacity</li>
@@ -209,10 +231,9 @@
                                 <li>3 Year Warranty</li>
                             </ul>
                             <div class="price-tag">₹ 12,999</div>
-                            <button class="product-btn">Know more</button>
                         </div>
-
                         <div class="spec-card">
+                            <img src="assets/images/MKSSAWM9.jpg" alt="9.0 KG Semi-Automatic Washing Machine" class="product-image" />
                             <h3>9.0 KG Semi-Automatic</h3>
                             <ul class="spec-list">
                                 <li>9.0 KG Capacity</li>
@@ -222,10 +243,9 @@
                                 <li>3 Year Warranty</li>
                             </ul>
                             <div class="price-tag">₹ 15,999</div>
-                            <button class="product-btn">Know more</button>
                         </div>
-
                         <div class="spec-card">
+                            <img src="assets/images/MKSSAWM11.jpg" alt="11.0 KG Semi-Automatic Washing Machine" class="product-image" />
                             <h3>11.0 KG Semi-Automatic</h3>
                             <ul class="spec-list">
                                 <li>11.0 KG Capacity</li>
@@ -235,72 +255,55 @@
                                 <li>3 Year Warranty</li>
                             </ul>
                             <div class="price-tag">₹ 18,999</div>
-                            <button class="product-btn">Know more</button>
                         </div>
                     </div>
                 </div>
-
                 <!-- Electronics -->
                 <div class="product-category">
                     <h2 class="category-title">Electronics & Appliances</h2>
                     <div class="product-specs">
                         <div class="spec-card">
-                            <h3>Voltage Stabilizer 500VA</h3>
+                            <img src="assets/images/stabilizer-500va-fridge.jpg" alt="Voltage Stabilizer 500VA" class="product-image" />
+                            <h3>Voltage Ref Stabilizer 500VA</h3>
                             <ul class="spec-list">
                                 <li>500VA Capacity</li>
                                 <li>Digital Display</li>
                                 <li>Overload Protection</li>
                                 <li>Wide Input Range</li>
-                                <li>2 Year Warranty</li>
+                                <li>5 Year Warranty</li>
                             </ul>
                             <div class="price-tag">₹ 2,999</div>
-                            <button class="product-btn">Know more</button>
                         </div>
-
                         <div class="spec-card">
-                            <h3>Voltage Stabilizer 750W</h3>
+                            <img src="assets/images/stabilizer-500va-premium.jpg" alt="Voltage Stabilizer 75Inch TV" class="product-image" />
+                            <h3>Voltage Stabilizer 75Inch TV/h3>
                             <ul class="spec-list">
                                 <li>750W Capacity</li>
                                 <li>Digital Display</li>
                                 <li>Overload Protection</li>
                                 <li>Wide Input Range</li>
-                                <li>2 Year Warranty</li>
+                                <li>5 Year Warranty</li>
                             </ul>
                             <div class="price-tag">₹ 3,999</div>
-                            <button class="product-btn">Know more</button>
                         </div>
-
-                        <div class="spec-card">
-                            <h3>Electric Iron 750W</h3>
+                    </div>
+                     <div class="spec-card">
+                            <img src="assets/images/Voltage Stabilizer 75Inch TV.jpg" alt="Voltage Stabilizer 43Inch Tv" class="product-image" />
+                            <h3>Voltage Stabilizer 43Inch Tv</h3>
                             <ul class="spec-list">
-                                <li>750W Power</li>
-                                <li>Non-stick Coating</li>
-                                <li>Variable Temperature</li>
-                                <li>Auto Shut-off</li>
-                                <li>1 Year Warranty</li>
+                                <li>750W Capacity</li>
+                                <li>Digital Display</li>
+                                <li>Overload Protection</li>
+                                <li>Wide Input Range</li>
+                                <li>5 Year Warranty</li>
                             </ul>
-                            <div class="price-tag">₹ 899</div>
-                            <button class="product-btn">Know more</button>
-                        </div>
-
-                        <div class="spec-card">
-                            <h3>Electric Iron 1000W</h3>
-                            <ul class="spec-list">
-                                <li>1000W Power</li>
-                                <li>Non-stick Coating</li>
-                                <li>Variable Temperature</li>
-                                <li>Auto Shut-off</li>
-                                <li>1 Year Warranty</li>
-                            </ul>
-                            <div class="price-tag">₹ 1,199</div>
-                            <button class="product-btn">Know more</button>
+                            <div class="price-tag">₹ 2,999</div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
     </main>
-
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -325,7 +328,6 @@
             </div>
         </div>
     </footer>
-
     <script src="script.js"></script>
 </body>
 </html>
