@@ -1,357 +1,179 @@
-// DOM Content Loaded
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize all functionality
-    initMobileMenu();
-    initSlider();
-    initScrollEffects();
-    initProductCards();
-});
+// assets/js/script.js
+// ============================================================================
+// Makwell Site – Interaction Layer (Extended)
+// - Mobile nav toggle (ARIA-friendly)
+// - Close nav on link click / outside click
+// - Sticky header shadow on scroll
+// - Smooth scroll to in-page anchors with header offset
+// - Tabs, Accordion, Modal, Toast helpers
+// - Optional: simple fade slider if .slide elements exist
+// ============================================================================
 
-// Mobile Menu Functionality
-function initMobileMenu() {
-    const navToggle = document.querySelector('.nav-toggle');
-    const navMenu = document.querySelector('.nav-menu');
+(function () {
+  const qs = (sel, root = document) => root.querySelector(sel);
+  const qsa = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
-    if (navToggle && navMenu) {
-        navToggle.addEventListener('click', function() {
-            navMenu.classList.toggle('active');
-            navToggle.classList.toggle('active');
-        });
+  // ---------- Mobile Nav Toggle ----------
+  const header = qs('.site-header');
+  const nav = qs('.primary-nav');
+  const btn = qs('.nav-toggle');
+  const list = qs('.nav-list');
 
-        // Close menu when clicking on a link
-        const navLinks = document.querySelectorAll('.nav-menu a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                navMenu.classList.remove('active');
-                navToggle.classList.remove('active');
-            });
-        });
+  function setOpen(open) {
+    if (!nav || !btn || !list) return;
+    nav.setAttribute('aria-expanded', String(open));
+    btn.setAttribute('aria-expanded', String(open));
+    list.style.display = open ? 'flex' : '';
+  }
 
-        // Close menu when clicking outside
-        document.addEventListener('click', function(event) {
-            if (!navToggle.contains(event.target) && !navMenu.contains(event.target)) {
-                navMenu.classList.remove('active');
-                navToggle.classList.remove('active');
-            }
-        });
-    }
-}
-
-// Slider Functionality
-function initSlider() {
-    const slides = document.querySelectorAll('.slide');
-    const navDots = document.querySelectorAll('.nav-dot');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-
-    let currentSlide = 0;
-    const totalSlides = slides.length;
-    let autoSlideInterval;
-
-    // Function to show specific slide
-    function showSlide(index) {
-        // Remove active class from all slides and dots
-        slides.forEach(slide => slide.classList.remove('active'));
-        navDots.forEach(dot => dot.classList.remove('active'));
-
-        // Add active class to current slide and dot
-        if (slides[index]) {
-            slides[index].classList.add('active');
-        }
-        if (navDots[index]) {
-            navDots[index].classList.add('active');
-        }
-
-        currentSlide = index;
-    }
-
-    // Function to go to next slide
-    function nextSlide() {
-        const next = (currentSlide + 1) % totalSlides;
-        showSlide(next);
-    }
-
-    // Function to go to previous slide
-    function prevSlide() {
-        const prev = (currentSlide - 1 + totalSlides) % totalSlides;
-        showSlide(prev);
-    }
-
-    // Auto slide functionality
-    function startAutoSlide() {
-        autoSlideInterval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
-    }
-
-    function stopAutoSlide() {
-        clearInterval(autoSlideInterval);
-    }
-
-    // Event listeners for navigation buttons
-    if (nextBtn) {
-        nextBtn.addEventListener('click', function() {
-            stopAutoSlide();
-            nextSlide();
-            startAutoSlide();
-        });
-    }
-
-    if (prevBtn) {
-        prevBtn.addEventListener('click', function() {
-            stopAutoSlide();
-            prevSlide();
-            startAutoSlide();
-        });
-    }
-
-    // Event listeners for navigation dots
-    navDots.forEach((dot, index) => {
-        dot.addEventListener('click', function() {
-            stopAutoSlide();
-            showSlide(index);
-            startAutoSlide();
-        });
+  if (nav && btn && list) {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = nav.getAttribute('aria-expanded') === 'true';
+      setOpen(!open);
     });
 
-    // Keyboard navigation
-    document.addEventListener('keydown', function(event) {
-        if (event.key === 'ArrowLeft') {
-            stopAutoSlide();
-            prevSlide();
-            startAutoSlide();
-        } else if (event.key === 'ArrowRight') {
-            stopAutoSlide();
-            nextSlide();
-            startAutoSlide();
-        }
+    list.addEventListener('click', (e) => {
+      const a = e.target.closest('a');
+      if (a) setOpen(false);
     });
 
-    // Pause auto-slide on hover
-    const sliderContainer = document.querySelector('.slider-container');
-    if (sliderContainer) {
-        sliderContainer.addEventListener('mouseenter', stopAutoSlide);
-        sliderContainer.addEventListener('mouseleave', startAutoSlide);
+    document.addEventListener('click', (e) => {
+      if (!nav.contains(e.target) && nav.getAttribute('aria-expanded') === 'true') {
+        setOpen(false);
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && nav.getAttribute('aria-expanded') === 'true') {
+        setOpen(false);
+      }
+    });
+  }
+
+  // ---------- Sticky Header Shadow ----------
+  const onScroll = () => {
+    if (!header) return;
+    if (window.scrollY > 10) header.classList.add('is-scrolled');
+    else header.classList.remove('is-scrolled');
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // ---------- Smooth Anchor Scroll ----------
+  const headerHeight = () => (header ? header.offsetHeight : 0);
+  qsa('a[href^="#"]').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      const id = link.getAttribute('href');
+      if (!id || id === '#') return;
+      const target = qs(id);
+      if (!target) return;
+      e.preventDefault();
+      const y = target.getBoundingClientRect().top + window.scrollY - (headerHeight() + 8);
+      window.scrollTo({ top: y, behavior: 'smooth' });
+      history.pushState(null, '', id);
+    });
+  });
+
+  // ---------- Tabs ----------
+  qsa('.tabs').forEach((tabs) => {
+    const buttons = qsa('.tab-btn', tabs);
+    const panels = qsa('.tab-panel', tabs);
+    function select(i) {
+      buttons.forEach((b, idx) => b.setAttribute('aria-selected', String(idx === i)));
+      panels.forEach((p, idx) => p.setAttribute('aria-hidden', String(idx !== i)));
     }
+    buttons.forEach((b, i) => b.addEventListener('click', () => select(i)));
+    select(0);
+  });
 
-    // Touch/Swipe support for mobile
-    let touchStartX = 0;
-    let touchEndX = 0;
+  // ---------- Accordion ----------
+  qsa('.accordion .accordion-item').forEach((item) => {
+    const headerEl = qs('.accordion-header', item);
+    if (!headerEl) return;
+    headerEl.addEventListener('click', () => {
+      const expanded = item.getAttribute('aria-expanded') === 'true';
+      item.setAttribute('aria-expanded', String(!expanded));
+    });
+  });
 
-    if (sliderContainer) {
-        sliderContainer.addEventListener('touchstart', function(event) {
-            touchStartX = event.changedTouches[0].screenX;
-        });
+  // ---------- Modal ----------
+  function openModal(id) {
+    const modal = qs(id);
+    const backdrop = qs(`${id}-backdrop`) || qs('.modal-backdrop');
+    if (!modal) return;
+    modal.setAttribute('aria-hidden', 'false');
+    if (backdrop) backdrop.setAttribute('aria-hidden', 'false');
+  }
+  function closeModal(id) {
+    const modal = qs(id);
+    const backdrop = qs(`${id}-backdrop`) || qs('.modal-backdrop');
+    if (!modal) return;
+    modal.setAttribute('aria-hidden', 'true');
+    if (backdrop) backdrop.setAttribute('aria-hidden', 'true');
+  }
+  window.MakwellModal = { open: openModal, close: closeModal };
 
-        sliderContainer.addEventListener('touchend', function(event) {
-            touchEndX = event.changedTouches[0].screenX;
-            handleSwipe();
-        });
+  qsa('[data-modal-open]').forEach((btn) => {
+    btn.addEventListener('click', () => openModal(btn.getAttribute('data-modal-open')));
+  });
+  qsa('[data-modal-close]').forEach((btn) => {
+    btn.addEventListener('click', () => closeModal(btn.getAttribute('data-modal-close')));
+  });
+
+  // Close modal on ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    qsa('.modal').forEach((m) => m.setAttribute('aria-hidden', 'true'));
+    qsa('.modal-backdrop').forEach((b) => b.setAttribute('aria-hidden', 'true'));
+  });
+
+  // ---------- Toast ----------
+  function toast(message, type = '') {
+    const wrap = qs('.toast-wrap') || (() => {
+      const w = document.createElement('div');
+      w.className = 'toast-wrap';
+      document.body.appendChild(w);
+      return w;
+    })();
+    const el = document.createElement('div');
+    el.className = `toast ${type}`.trim();
+    el.textContent = message;
+    wrap.appendChild(el);
+    setTimeout(() => el.remove(), 3500);
+  }
+  window.toast = toast;
+
+  // ---------- Optional Fade Slider ----------
+  const slider = qs('.slider') || qs('.hero');
+  if (slider) {
+    const slides = qsa('.slide', slider);
+    let idx = 0;
+    if (slides.length > 1) {
+      slides.forEach((s, i) => {
+        s.style.position = 'absolute';
+        s.style.inset = '0';
+        s.style.opacity = i === 0 ? '1' : '0';
+        s.style.transition = 'opacity 800ms ease';
+      });
+      slider.style.position = 'relative';
+      setInterval(() => {
+        const prev = idx;
+        idx = (idx + 1) % slides.length;
+        slides[prev].style.opacity = '0';
+        slides[idx].style.opacity = '1';
+      }, 6000);
     }
+  }
 
-    function handleSwipe() {
-        const swipeThreshold = 50;
-        const diff = touchStartX - touchEndX;
-
-        if (Math.abs(diff) > swipeThreshold) {
-            stopAutoSlide();
-            if (diff > 0) {
-                nextSlide(); // Swipe left - next slide
-            } else {
-                prevSlide(); // Swipe right - previous slide
-            }
-            startAutoSlide();
-        }
-    }
-
-    // Start auto-slide
-    startAutoSlide();
-
-    // Initialize first slide
-    showSlide(0);
-}
-
-// Scroll Effects
-function initScrollEffects() {
-    // Smooth scrolling for navigation links
-    const navLinks = document.querySelectorAll('a[href^="#"]');
-
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(event) {
-            event.preventDefault();
-
-            const targetId = this.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
-
-            if (targetSection) {
-                const headerHeight = document.querySelector('.header').offsetHeight;
-                const targetPosition = targetSection.offsetTop - headerHeight;
-
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
+  // ---------- Utility: data-scroll-to ----------
+  qsa('[data-scroll-to]').forEach((el) => {
+    el.addEventListener('click', () => {
+      const id = el.getAttribute('data-scroll-to');
+      const target = id ? qs(id) : null;
+      if (!target) return;
+      const y = target.getBoundingClientRect().top + window.scrollY - (headerHeight() + 8);
+      window.scrollTo({ top: y, behavior: 'smooth' });
     });
-
-    // Header background on scroll
-    const header = document.querySelector('.header');
-    if (header) {
-        window.addEventListener('scroll', function() {
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(255, 255, 255, 0.98)';
-                header.style.backdropFilter = 'blur(15px)';
-            } else {
-                header.style.background = 'rgba(255, 255, 255, 0.95)';
-                header.style.backdropFilter = 'blur(10px)';
-            }
-        });
-    }
-
-    // Intersection Observer for animations
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
-
-    // Observe elements for scroll animations
-    const animateElements = document.querySelectorAll('.product-card, .blog-header');
-    animateElements.forEach(element => {
-        element.style.opacity = '0';
-        element.style.transform = 'translateY(30px)';
-        element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(element);
-    });
-}
-
-// Product Cards Functionality
-function initProductCards() {
-    const productButtons = document.querySelectorAll('.product-btn');
-
-    productButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const productCard = this.closest('.product-card');
-            const productTitle = productCard.querySelector('.product-title').textContent;
-
-            // For now, just show an alert. In a real implementation, 
-            // this would navigate to a product details page
-            alert(`Learn more about ${productTitle}`);
-
-            // Example of how you might track clicks for analytics
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'product_click', {
-                    'product_name': productTitle,
-                    'event_category': 'engagement'
-                });
-            }
-        });
-    });
-
-    // Add hover effects programmatically
-    const productCards = document.querySelectorAll('.product-card');
-    productCards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-8px)';
-            this.style.boxShadow = '0 12px 40px rgba(0, 0, 0, 0.2)';
-        });
-
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
-            this.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
-        });
-    });
-}
-
-// Blog functionality
-function initBlogSection() {
-    const viewAllBtn = document.querySelector('.view-all-btn');
-
-    if (viewAllBtn) {
-        viewAllBtn.addEventListener('click', function() {
-            // In a real implementation, this would navigate to the blog page
-            window.location.href = '#blogs';
-        });
-    }
-}
-
-// Utility Functions
-function debounce(func, wait, immediate) {
-    let timeout;
-    return function() {
-        const context = this, args = arguments;
-        const later = function() {
-            timeout = null;
-            if (!immediate) func.apply(context, args);
-        };
-        const callNow = immediate && !timeout;
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-        if (callNow) func.apply(context, args);
-    };
-}
-
-// Performance optimization for scroll events
-const debouncedScrollHandler = debounce(function() {
-    // Any scroll-based functionality can go here
-}, 10);
-
-window.addEventListener('scroll', debouncedScrollHandler);
-
-// Error handling
-window.addEventListener('error', function(event) {
-    console.error('JavaScript error:', event.error);
-});
-
-// Initialize blog section
-document.addEventListener('DOMContentLoaded', function() {
-    initBlogSection();
-});
-
-// Accessibility improvements
-document.addEventListener('keydown', function(event) {
-    // Add keyboard navigation for product cards
-    if (event.key === 'Enter' || event.key === ' ') {
-        const focusedElement = document.activeElement;
-        if (focusedElement.classList.contains('product-btn')) {
-            event.preventDefault();
-            focusedElement.click();
-        }
-    }
-});
-
-// Preload images for better performance
-function preloadImages() {
-    const imageUrls = [
-        'assets/images/logo.jpg'
-        // Add other image URLs here
-    ];
-
-    imageUrls.forEach(url => {
-        const img = new Image();
-        img.src = url;
-    });
-}
-
-// Call preload on page load
-window.addEventListener('load', preloadImages);
-
-// Service Worker registration (for PWA capabilities)
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-        navigator.serviceWorker.register('/service-worker.js')
-            .then(function(registration) {
-                console.log('SW registered: ', registration);
-            })
-            .catch(function(registrationError) {
-                console.log('SW registration failed: ', registrationError);
-            });
-    });
-}
+  });
+})();
