@@ -1,5 +1,5 @@
-<!-- scripts/products-data.js -->
-<script>
+// scripts/products-data.js
+// MakWell product list – no fetch required
 window.PRODUCTS = [
   { id:"tv-24n", title:'24" LED TV (Normal)', category:"Televisions", size:24, os:"—", series:"LED TV",
     tags:["Full HD 1080p","60cm","Low Power"], specs:["16.7M Colors"], image:"assets/MK24.jpg" },
@@ -30,4 +30,3 @@ window.PRODUCTS = [
   { id:"stab-led-mini", title:"MINI Stabilizer (up to 43 Inch LED TV)", category:"Stabilizers", size:43, series:"Stabilizer",
     tags:["LED TV","5 Year Warranty"], image:"assets/MKSTBZMINI.jpg" }
 ];
-</script>
