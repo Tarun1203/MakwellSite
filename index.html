@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MakWell – Home Electronics</title>
+  <meta name="description" content="Smart Televisions, Semi-Automatic Washing Machines, and Stabilizers."/>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container row between">
+      <a class="brand" href="index.html">
+        <img src="assets/logo.svg" alt="MakWell logo"/>
+      </a>
+
+      <!-- mobile hamburger -->
+      <button id="menu-toggle" class="menu-btn" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-nav">☰</button>
+
+      <nav id="site-nav" class="nav" role="navigation">
+        <a href="products.html">Products</a>
+        <a href="dealers.html">Dealers</a>
+        <a href="about.html">About</a>
+        <a href="MAK WELL CATALOGUE 2025.pdf" download>Catalogue</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Centered hero -->
+    <section class="center-hero">
+      <div class="container">
+        <img src="assets/logo.svg" alt="MakWell logo large"/>
+        <p>Smart Televisions, reliable Semi-Automatic Washing Machines, and electronic Stabilizers — crafted for performance and value.</p>
+        <div class="row gap" style="justify-content:center">
+          <a class="btn" href="products.html">Explore Products</a>
+          <a class="btn btn-outline" href="MAK WELL CATALOGUE 2025.pdf" download>Download Catalogue</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured carousel -->
+    <section class="section bg-soft">
+      <div class="container">
+        <h2 style="text-align:center;margin-bottom:20px">Featured Products</h2>
+        <div class="carousel" id="carousel">
+          <!-- Replace these with your real images in /assets -->
+          <img src="assets/placeholder.svg" alt="Feature 1"/>
+          <img src="assets/placeholder.svg" alt="Feature 2"/>
+          <img src="assets/placeholder.svg" alt="Feature 3"/>
+          <img src="assets/placeholder.svg" alt="Feature 4"/>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container row between wrap">
+      <p>© 2025 MakWell. All rights reserved.</p>
+      <p class="muted">Made with ♥ for performance & clarity.</p>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp -->
+  <a id="wa" class="wa" href="#" target="_blank" rel="noopener">Chat on WhatsApp</a>
+
+  <!-- tiny JS: menu toggle + carousel auto-scroll + WA link -->
+  <script>
+    // WhatsApp helper
+    const WHATSAPP='919482844677';
+    function waLink(t){ return `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(t)}`; }
+    document.getElementById('wa').href = waLink("Hello MakWell, I'm on makwell.co and would like assistance.");
+
+    // Mobile menu
+    (function(){
+      const btn = document.getElementById('menu-toggle');
+      const nav = document.getElementById('site-nav');
+      if(!btn || !nav) return;
+      btn.addEventListener('click', ()=> {
+        const open = nav.classList.toggle('open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      // close menu on outside click
+      document.addEventListener('click', (e)=>{
+        if(!nav.classList.contains('open')) return;
+        const inside = nav.contains(e.target) || btn.contains(e.target);
+        if(!inside){ nav.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
+      });
+      // close after choosing a link
+      nav.querySelectorAll('a').forEach(a => a.addEventListener('click', ()=>{
+        nav.classList.remove('open'); btn.setAttribute('aria-expanded','false');
+      }));
+    })();
+
+    // simple auto-scrolling carousel
+    (function(){
+      const car = document.getElementById('carousel');
+      if(!car) return;
+      let scrollAmount = 0;
+      setInterval(()=> {
+        scrollAmount += 300;
+        if(scrollAmount >= car.scrollWidth - car.clientWidth) scrollAmount = 0;
+        car.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+      }, 3000);
+    })();
+  </script>
+</body>
+</html>

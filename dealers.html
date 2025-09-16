@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dealers – MakWell</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container row between">
+      <a class="brand" href="index.html"><img src="assets/logo.svg" alt="MakWell logo"/></a>
+
+      <button id="menu-toggle" class="menu-btn" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-nav">☰</button>
+
+      <nav id="site-nav" class="nav" role="navigation">
+        <a href="products.html">Products</a>
+        <a href="dealers.html">Dealers</a>
+        <a href="about.html">About</a>
+        <a href="MAK WELL CATALOGUE 2025.pdf" download>Catalogue</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <h2>Dealers</h2>
+        <p class="muted">Find our authorised dealers. (Replace with your real list.)</p>
+
+        <div class="dealer-grid">
+          <div class="card">
+            <p class="title">Bengaluru – Koramangala</p>
+            <p>+91 98XXXXXX90 · dealer@example.com</p>
+            <p>10:00 – 19:00 (Mon–Sat)</p>
+          </div>
+          <div class="card">
+            <p class="title">Mysuru – Devaraja</p>
+            <p>+91 97XXXXXX12 · mysuru@example.com</p>
+            <p>10:00 – 19:00 (Mon–Sat)</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container row between wrap">
+      <p>© 2025 MakWell. All rights reserved.</p>
+      <p class="muted">Made with ♥ for performance & clarity.</p>
+    </div>
+  </footer>
+
+  <a id="wa" class="wa" href="https://wa.me/919482844677" target="_blank" rel="noopener">Chat on WhatsApp</a>
+
+  <script>
+    // Mobile menu
+    (function(){
+      const btn = document.getElementById('menu-toggle');
+      const nav = document.getElementById('site-nav');
+      if(!btn || !nav) return;
+      btn.addEventListener('click', ()=> {
+        const open = nav.classList.toggle('open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      document.addEventListener('click', (e)=>{
+        if(!nav.classList.contains('open')) return;
+        const inside = nav.contains(e.target) || btn.contains(e.target);
+        if(!inside){ nav.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
+      });
+      nav.querySelectorAll('a').forEach(a => a.addEventListener('click', ()=>{
+        nav.classList.remove('open'); btn.setAttribute('aria-expanded','false');
+      }));
+    })();
+  </script>
+</body>
+</html>

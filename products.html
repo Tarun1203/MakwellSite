@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Products – MakWell</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container row between">
+      <a class="brand" href="index.html"><img src="assets/logo.svg" alt="MakWell logo"/></a>
+
+      <button id="menu-toggle" class="menu-btn" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-nav">☰</button>
+
+      <nav id="site-nav" class="nav" role="navigation">
+        <a href="products.html">Products</a>
+        <a href="dealers.html">Dealers</a>
+        <a href="about.html">About</a>
+        <a href="MAK WELL CATALOGUE 2025.pdf" download>Catalogue</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section bg-soft">
+      <div class="container">
+        <div class="row between wrap gap">
+          <h2>Our Products</h2>
+          <input id="search" class="input" type="search" placeholder="Search TVs, SAWM, 4K…"/>
+        </div>
+
+        <div class="tabs row wrap gap" id="category-tabs">
+          <button class="tab active" data-cat="Televisions">Televisions</button>
+          <button class="tab" data-cat="Washing Machines">Washing Machines</button>
+          <button class="tab" data-cat="Stabilizers">Stabilizers</button>
+        </div>
+
+        <div class="size-filter row wrap gap" id="size-filter" hidden>
+          <button class="chip active" data-size="all">All sizes</button>
+        </div>
+
+        <div id="grid" class="grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container row between wrap">
+      <p>© 2025 MakWell. All rights reserved.</p>
+      <p class="muted">Made with ♥ for performance & clarity.</p>
+    </div>
+  </footer>
+
+  <a id="wa" class="wa" href="#" target="_blank" rel="noopener">Chat on WhatsApp</a>
+
+  <script src="scripts/products.js"></script>
+
+  <!-- re-use tiny JS for menu + WA link -->
+  <script>
+    const WHATSAPP='919482844677';
+    function waLink(t){ return `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(t)}`; }
+    document.getElementById('wa').href = waLink("Hello MakWell, I'm browsing Products and would like assistance.");
+
+    (function(){
+      const btn = document.getElementById('menu-toggle');
+      const nav = document.getElementById('site-nav');
+      if(!btn || !nav) return;
+      btn.addEventListener('click', ()=> {
+        const open = nav.classList.toggle('open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      document.addEventListener('click', (e)=>{
+        if(!nav.classList.contains('open')) return;
+        const inside = nav.contains(e.target) || btn.contains(e.target);
+        if(!inside){ nav.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
+      });
+      nav.querySelectorAll('a').forEach(a => a.addEventListener('click', ()=>{
+        nav.classList.remove('open'); btn.setAttribute('aria-expanded','false');
+      }));
+    })();
+  </script>
+</body>
+</html>
