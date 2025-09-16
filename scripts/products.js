@@ -1,5 +1,8 @@
 <script>
-// MakWell product list – no fetch required
+let data = Array.isArray(window.PRODUCTS) ? window.PRODUCTS : [];
+// remove or ignore any fetch('products.json') if you had it
+
+  // MakWell product list – no fetch required
 window.PRODUCTS = [
   {
     id: "tv-24n",
@@ -148,3 +151,4 @@ window.PRODUCTS = [
   }
 ];
 </script>
+
